@@ -1,0 +1,140 @@
+{
+  "request": {
+    "request_id": "req-changed_occupancy",
+    "material_id": "M01",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "channel": "short-video",
+    "hard_requirement": true
+  },
+  "mode": "mock",
+  "model": "deterministic-offline-simulator",
+  "started_at": "2026-11-08T15:39:23.119311+00:00",
+  "status": "needs_confirmation",
+  "review_status": "passed",
+  "risks": [],
+  "suggested_at": "2026-11-10T20:00:00+08:00",
+  "pending_items": [
+    "请确认是否将要求时段改为 2026-11-10T20:00:00+08:00"
+  ],
+  "confirmation_status": "pending_hard_requirement_change",
+  "draft": {
+    "draft_id": "draft_ac540350dcb4",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "suggested_at": "2026-11-10T20:00:00+08:00",
+    "confirmation_status": "pending_hard_requirement_change",
+    "saved": true,
+    "published": false,
+    "reserved": false,
+    "duplicate": false
+  },
+  "published": false,
+  "trace": [
+    {
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {},
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "owner": "内容团队",
+            "copyright": "cleared"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "passed",
+          "risks": []
+        }
+      }
+    },
+    {
+      "step": 3,
+      "decision": {
+        "action": "query_slots",
+        "args": {
+          "start_at": "2026-11-10T18:00:00+08:00"
+        },
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "slots": [
+            {
+              "at": "2026-11-10T18:00:00+08:00",
+              "available": false
+            },
+            {
+              "at": "2026-11-10T19:00:00+08:00",
+              "available": false
+            },
+            {
+              "at": "2026-11-10T20:00:00+08:00",
+              "available": true
+            }
+          ],
+          "reserved": false
+        }
+      }
+    },
+    {
+      "step": 4,
+      "decision": {
+        "action": "save_draft",
+        "args": {
+          "suggested_at": "2026-11-10T20:00:00+08:00"
+        },
+        "reason": "根据时段查询选择可用建议"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "draft_id": "draft_ac540350dcb4",
+          "requested_at": "2026-11-10T18:00:00+08:00",
+          "suggested_at": "2026-11-10T20:00:00+08:00",
+          "confirmation_status": "pending_hard_requirement_change",
+          "saved": true,
+          "published": false,
+          "reserved": false,
+          "duplicate": false
+        }
+      }
+    },
+    {
+      "step": 5,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "needs_confirmation",
+          "message": "已保存草稿；未发布"
+        },
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "needs_confirmation"
+        }
+      }
+    }
+  ],
+  "message": "建议已保存为待确认草稿，未发布",
+  "elapsed_seconds": 0.016,
+  "draft_count": 1
+}

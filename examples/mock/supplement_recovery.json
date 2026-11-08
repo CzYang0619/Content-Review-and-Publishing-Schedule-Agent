@@ -1,0 +1,180 @@
+{
+  "request": {
+    "request_id": "req-supplement_recovery",
+    "material_id": "M01",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "channel": "short-video",
+    "hard_requirement": true
+  },
+  "mode": "mock",
+  "model": "deterministic-offline-simulator",
+  "started_at": "2026-11-08T15:39:23.093627+00:00",
+  "status": "completed",
+  "review_status": "passed",
+  "risks": [],
+  "suggested_at": "2026-11-10T18:00:00+08:00",
+  "pending_items": [],
+  "confirmation_status": "confirmed",
+  "draft": {
+    "draft_id": "draft_5928d6f912fb",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "suggested_at": "2026-11-10T18:00:00+08:00",
+    "confirmation_status": "confirmed",
+    "saved": true,
+    "published": false,
+    "reserved": true,
+    "duplicate": false
+  },
+  "published": false,
+  "trace": [
+    {
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {},
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "copyright": "cleared"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "needs_info",
+          "risks": [
+            {
+              "code": "MISSING_METADATA",
+              "fields": [
+                "owner"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 3,
+      "decision": {
+        "action": "read_material",
+        "args": {
+          "supplement": true
+        },
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "copyright": "cleared",
+            "owner": "补充记录中的作者"
+          },
+          "supplement_checked": true
+        }
+      }
+    },
+    {
+      "step": 4,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "passed",
+          "risks": []
+        }
+      }
+    },
+    {
+      "step": 5,
+      "decision": {
+        "action": "query_slots",
+        "args": {
+          "start_at": "2026-11-10T18:00:00+08:00"
+        },
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "slots": [
+            {
+              "at": "2026-11-10T18:00:00+08:00",
+              "available": true
+            },
+            {
+              "at": "2026-11-10T19:00:00+08:00",
+              "available": true
+            },
+            {
+              "at": "2026-11-10T20:00:00+08:00",
+              "available": true
+            }
+          ],
+          "reserved": false
+        }
+      }
+    },
+    {
+      "step": 6,
+      "decision": {
+        "action": "save_draft",
+        "args": {
+          "suggested_at": "2026-11-10T18:00:00+08:00"
+        },
+        "reason": "根据时段查询选择可用建议"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "draft_id": "draft_5928d6f912fb",
+          "requested_at": "2026-11-10T18:00:00+08:00",
+          "suggested_at": "2026-11-10T18:00:00+08:00",
+          "confirmation_status": "confirmed",
+          "saved": true,
+          "published": false,
+          "reserved": true,
+          "duplicate": false
+        }
+      }
+    },
+    {
+      "step": 7,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "completed",
+          "message": "已保存草稿；未发布"
+        },
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "completed"
+        }
+      }
+    }
+  ],
+  "message": "草稿保存成功，未发布",
+  "elapsed_seconds": 0.016,
+  "draft_count": 1
+}

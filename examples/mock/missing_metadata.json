@@ -1,0 +1,135 @@
+{
+  "request": {
+    "request_id": "req-missing_metadata",
+    "material_id": "M01",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "channel": "short-video",
+    "hard_requirement": true
+  },
+  "mode": "mock",
+  "model": "deterministic-offline-simulator",
+  "started_at": "2026-11-08T15:39:23.002134+00:00",
+  "status": "needs_info",
+  "review_status": "needs_info",
+  "risks": [
+    {
+      "code": "MISSING_METADATA",
+      "fields": [
+        "owner"
+      ]
+    }
+  ],
+  "suggested_at": null,
+  "pending_items": [
+    "请补充缺失输入或素材元数据，见 message / risks"
+  ],
+  "confirmation_status": "not_checked",
+  "draft": {
+    "saved": false
+  },
+  "published": false,
+  "trace": [
+    {
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {},
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "copyright": "cleared"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "needs_info",
+          "risks": [
+            {
+              "code": "MISSING_METADATA",
+              "fields": [
+                "owner"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 3,
+      "decision": {
+        "action": "read_material",
+        "args": {
+          "supplement": true
+        },
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "copyright": "cleared"
+          },
+          "supplement_checked": true
+        }
+      }
+    },
+    {
+      "step": 4,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "needs_info",
+          "risks": [
+            {
+              "code": "MISSING_METADATA",
+              "fields": [
+                "owner"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 5,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "needs_info",
+          "message": "补查后信息仍不足"
+        },
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "needs_info"
+        }
+      }
+    }
+  ],
+  "message": "资料不足，未保存",
+  "elapsed_seconds": 0.016,
+  "draft_count": 0
+}

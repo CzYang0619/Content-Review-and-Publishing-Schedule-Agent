@@ -1,0 +1,84 @@
+{
+  "mode": "mock",
+  "model": "deterministic-offline-simulator",
+  "executed_at": "2026-11-08T15:39:22.971960+00:00",
+  "cases": [
+    {
+      "name": "normal",
+      "status": "completed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/normal.json"
+    },
+    {
+      "name": "missing_metadata",
+      "status": "needs_info",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/missing_metadata.json"
+    },
+    {
+      "name": "rule_risk",
+      "status": "blocked",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/rule_risk.json"
+    },
+    {
+      "name": "slot_conflict",
+      "status": "needs_confirmation",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/slot_conflict.json"
+    },
+    {
+      "name": "duplicate",
+      "status": "completed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/duplicate.json"
+    },
+    {
+      "name": "save_failure",
+      "status": "failed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/save_failure.json"
+    },
+    {
+      "name": "supplement_recovery",
+      "status": "completed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/supplement_recovery.json"
+    },
+    {
+      "name": "changed_occupancy",
+      "status": "needs_confirmation",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/changed_occupancy.json"
+    },
+    {
+      "name": "confirmed_alternative",
+      "status": "completed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/confirmed_alternative.json"
+    },
+    {
+      "name": "read_failure",
+      "status": "completed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/read_failure.json"
+    },
+    {
+      "name": "all_slots_occupied",
+      "status": "incomplete",
+      "passed": true,
+      "errors": [],
+      "file": "examples/mock/all_slots_occupied.json"
+    }
+  ]
+}

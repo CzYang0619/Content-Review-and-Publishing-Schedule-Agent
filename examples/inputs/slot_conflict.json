@@ -1,0 +1,46 @@
+{
+  "request": {
+    "request_id": "req-slot_conflict",
+    "material_id": "M01",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "channel": "short-video",
+    "hard_requirement": true
+  },
+  "world": {
+    "materials": {
+      "M01": {
+        "title": "字幕功能演示",
+        "owner": "内容团队",
+        "copyright": "cleared"
+      },
+      "M02": {
+        "title": "模板展示",
+        "copyright": "cleared"
+      },
+      "M03": {
+        "title": "效率提升80%",
+        "owner": "内容团队",
+        "copyright": "unknown"
+      }
+    },
+    "rules": {
+      "version": "synthetic-v1",
+      "required_fields": [
+        "title",
+        "owner",
+        "copyright"
+      ],
+      "blocked_terms": [
+        "保证收益",
+        "效率提升80%"
+      ]
+    },
+    "schedule": [
+      {
+        "at": "2026-11-10T18:00:00+08:00",
+        "channel": "short-video"
+      }
+    ],
+    "supplements": {}
+  }
+}

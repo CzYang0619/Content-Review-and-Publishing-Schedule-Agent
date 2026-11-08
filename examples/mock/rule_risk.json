@@ -1,0 +1,86 @@
+{
+  "request": {
+    "request_id": "req-rule_risk",
+    "material_id": "M01",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "channel": "short-video",
+    "hard_requirement": true
+  },
+  "mode": "mock",
+  "model": "deterministic-offline-simulator",
+  "started_at": "2026-11-08T15:39:23.015055+00:00",
+  "status": "blocked",
+  "review_status": "blocked",
+  "risks": [
+    {
+      "code": "COPYRIGHT_NOT_CLEARED"
+    }
+  ],
+  "suggested_at": null,
+  "pending_items": [],
+  "confirmation_status": "not_checked",
+  "draft": {
+    "saved": false
+  },
+  "published": false,
+  "trace": [
+    {
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {},
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "owner": "内容团队",
+            "copyright": "unknown"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "blocked",
+          "risks": [
+            {
+              "code": "COPYRIGHT_NOT_CLEARED"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 3,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "blocked",
+          "message": "存在阻断风险"
+        },
+        "reason": "离线流程模拟"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "blocked"
+        }
+      }
+    }
+  ],
+  "message": "规则风险阻断，未保存",
+  "elapsed_seconds": 0.0,
+  "draft_count": 0
+}

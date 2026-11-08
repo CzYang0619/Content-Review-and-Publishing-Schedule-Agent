@@ -1,0 +1,5 @@
+{
+  "version": "synthetic-v1",
+  "required_fields": ["title", "owner", "copyright"],
+  "blocked_terms": ["保证收益", "效率提升80%"]
+}

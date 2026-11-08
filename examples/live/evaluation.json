@@ -1,0 +1,44 @@
+{
+  "mode": "live",
+  "model": "gpt-4.1-mini",
+  "executed_at": "2026-11-08T15:39:23.344761+00:00",
+  "cases": [
+    {
+      "name": "normal",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "status expected completed, got failed",
+        "unexpected save state"
+      ],
+      "file": "examples/live/normal.json"
+    },
+    {
+      "name": "slot_conflict",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "status expected needs_confirmation, got failed",
+        "unexpected save state",
+        "expected 19:00 proposal",
+        "unapproved proposal cannot reserve slot"
+      ],
+      "file": "examples/live/slot_conflict.json"
+    },
+    {
+      "name": "save_failure",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "save failure injection was not reached"
+      ],
+      "file": "examples/live/save_failure.json"
+    }
+  ]
+}
