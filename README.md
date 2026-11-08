@@ -10,6 +10,7 @@
 - `examples/mock/` 是实际运行的离线记录，仅证明流程与业务约束。
 - 本机真实模型接口认证失败（HTTP 401），记录位于 `examples/live/`。**这些记录不是通过的 ReAct 证据，当前版本尚不满足考核的真实模型决策验收。** 配置有效接口后运行下方 live 评估，生成真实结果。
 - GitHub 目标仓库：https://github.com/CzYang0619/Content-Review-and-Publishing-Schedule-Agent 。最终 commit SHA 使用 `git rev-parse HEAD` 核对。
+- 上传尝试返回 HTTP 403：本机 GitHub 账号 Marina-016 无目标仓库写权限；代码当前保存在本地，尚未成功 push。
 
 ## 环境与运行
 
