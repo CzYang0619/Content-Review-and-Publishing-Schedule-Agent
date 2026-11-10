@@ -6,11 +6,11 @@
 
 ## 当前交付状态
 
-- 核心实现、离线验收案例、自动化测试和文档已提供。
+- 核心实现、22 项自动化测试、11 组离线案例和 10 组真实模型案例已提供；六项必须验收均已覆盖。
 - `examples/mock/` 是实际运行的离线记录，仅证明流程与业务约束。
-- 最新真实模型尝试返回 HTTP 429，独立最小请求诊断为 `credit_balance_exhausted` / `insufficient_quota`，需要补充 API 额度。历史其他案例的 HTTP 401 失败记录仍保留于 `examples/live/`。**这些记录不是通过的 ReAct 证据，当前版本尚不满足考核的真实模型决策验收。** 接口额度恢复后运行下方 live 评估，生成真实结果。
+- 真实验收使用智谱官方免费 `glm-4-flash-250414`，10/10 案例断言通过。提交基线为 `examples/glm4-final/`；`examples/live/` 是同一批次的便捷副本，之后复跑会覆盖后者。原始限流、参数错误和格式错误记录保留在 `examples/history/`、`examples/glm4-experiment/`。
 - GitHub 目标仓库：https://github.com/CzYang0619/Content-Review-and-Publishing-Schedule-Agent 。最终 commit SHA 使用 `git rev-parse HEAD` 核对。
-- 已使用 CzYang0619 完成 GitHub 授权并成功上传 main；可克隆仓库运行。早先的账号写权限问题已解决，真实模型接口额度问题仍待解决。
+- 已使用 CzYang0619 完成 GitHub 授权并上传 main；OpenAI 额度不再是本项目的前置条件，推荐使用下方免费入口复跑。
 
 ## 环境与运行
 
@@ -30,7 +30,7 @@ Windows 若 `python` 指向 WindowsApps 占位程序，改用已安装的 Python
 
 ## 免费真实模型入口（智谱）
 
-已核对智谱官方 [免费发布公告](https://www.zhipuai.cn/zh/news/148) 和 [GLM-4.7-Flash 文档](https://docs.bigmodel.cn/cn/guide/models/free/glm-4.7-flash)：该模型可免费调用，支持结构化输出。账户资格、实名要求和限流以平台实际提示为准；尚未取得智谱账户密钥，因此本项目尚无该平台成功运行记录。
+已核对智谱官方 [定价文档](https://docs.bigmodel.cn/cn/guide/start/pricing)：`glm-4-flash-250414` 与 `glm-4.7-flash` 均列为免费文本模型。默认采用已完成本项目真实验收的前者，后者保留为可选实验模型。账户资格、实名要求和限流以平台实际提示为准。
 
 1. 登录 [智谱 API Key 管理](https://bigmodel.cn/usercenter/proj-mgmt/apikeys)，创建自己的密钥。无需提供 OpenAI 密钥。
 2. 在本机终端运行以下命令，按提示粘贴智谱密钥，输入隐藏、不保存文件：
@@ -45,7 +45,9 @@ python scripts/run_free.py --cases normal
 python scripts/run_free.py
 ```
 
-也可预先设置本机进程环境变量 `BIGMODEL_API_KEY`。启动器固定使用 `https://open.bigmodel.cn/api/paas/v4` 和 `glm-4.7-flash`，忽略已有的其他服务商模型配置。不要选成不同的付费型号（例如 FlashX）。官方免费政策可能调整，不承诺无限调用。成功验收后才能更新当前“未完成真实模型验收”的状态。
+也可预先设置本机进程环境变量 `BIGMODEL_API_KEY`。启动器固定使用 `https://open.bigmodel.cn/api/paas/v4`，默认模型是 `glm-4-flash-250414`，可用 `--model glm-4.7-flash` 切换实验型号；参数只允许上述两个型号，忽略已有的其他服务商模型配置。官方免费政策可能调整，不承诺无限调用。
+
+免费入口串行调用，读取超时 120 秒。对瞬时限流/过载（1302、1305）最多重试两次，间隔 15/30 秒；格式不合规时要求模型重写单个动作，不执行多余对象。每次决策包含格式纠错在内最多 3 次 HTTP 尝试。服务不可用时停止批次，汇总列出未运行案例。
 
 ## 通用真实模型入口（含 OpenAI）
 
@@ -85,7 +87,7 @@ python -m src.cli --input examples/inputs/slot_conflict.json --mode live --db ru
 
 1. 运行测试和 mock 评估，查看 `examples/test-results.json` 与 `examples/mock/evaluation.json`。
 2. 检查 `normal.json` 与 `slot_conflict.json` 的工具参数、结果与后续决策；注意其 mode 标签。
-3. 配置可用模型后运行 live 评估，核验至少两条成功的真实模型动态路径。
+3. 查看 `examples/glm4-final/normal.json` 与 `slot_conflict.json` 的真实模型动作差异，配置自己的智谱密钥后可复跑验证。
 4. 修改输入的 `world.schedule` 再提交新请求，或改变 `data/rules.json` 后重跑评估。
 5. 重复提交同一请求；核对 draft_id 不变、draft_count 不增长。
 6. 检查保存失败返回 `draft.saved=false`，没有“已发布”成功声明。
@@ -100,7 +102,9 @@ scripts/evaluate.py  生成输入、实际运行、验证输出并保存 Trace
 scripts/verify.py    运行测试并写入机器可读记录
 examples/inputs/     可复用输入
 examples/mock/       离线实际结果（非真实模型证据）
-examples/live/       真实接口调用记录（当前认证失败）
+examples/glm4-final/ 提交时的真实模型成功验收基线
+examples/live/       真实记录便捷副本，后续复跑输出位置
+examples/history/    实际失败与修正前运行记录
 docs/                需求、方案、评估、AI 使用与复盘
 ```
 

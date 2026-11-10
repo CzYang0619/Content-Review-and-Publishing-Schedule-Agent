@@ -7,13 +7,22 @@
     "hard_requirement": true
   },
   "mode": "live",
-  "model": "gpt-4.1-mini",
-  "started_at": "2026-11-08T14:48:28.196836+00:00",
-  "status": "failed",
-  "review_status": "not_checked",
-  "risks": [],
+  "model": "glm-4-flash-250414",
+  "started_at": "2026-11-10T20:19:02.409896+00:00",
+  "status": "needs_info",
+  "review_status": "needs_info",
+  "risks": [
+    {
+      "code": "MISSING_METADATA",
+      "fields": [
+        "owner"
+      ]
+    }
+  ],
   "suggested_at": null,
-  "pending_items": [],
+  "pending_items": [
+    "请补充缺失输入或素材元数据，见 message / risks"
+  ],
   "confirmation_status": "not_checked",
   "draft": {
     "saved": false
@@ -21,11 +30,147 @@
   "published": false,
   "trace": [
     {
-      "event": "model_error",
-      "error": "模型调用失败: RuntimeError: MODEL_HTTP_401"
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {
+          "supplement": false
+        },
+        "reason": "根据指令，首先读取素材M01。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "copyright": "cleared"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "读取素材成功，接下来需要审核素材是否符合规则。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "needs_info",
+          "risks": [
+            {
+              "code": "MISSING_METADATA",
+              "fields": [
+                "owner"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 3,
+      "decision": {
+        "action": "read_material",
+        "args": {
+          "supplement": true
+        },
+        "reason": "审核结果显示素材缺少字段owner，需要补查资料。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "copyright": "cleared"
+          },
+          "supplement_checked": true
+        }
+      }
+    },
+    {
+      "step": 4,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "补查资料后重新审核素材是否符合规则。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "needs_info",
+          "risks": [
+            {
+              "code": "MISSING_METADATA",
+              "fields": [
+                "owner"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 5,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "needs_info",
+          "message": "素材审核仍需要补充信息"
+        },
+        "reason": "补查后素材仍缺少字段owner，审核未通过。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "needs_info"
+        }
+      }
     }
   ],
-  "message": "模型调用失败: RuntimeError: MODEL_HTTP_401",
-  "elapsed_seconds": 0.718,
+  "message": "资料不足，未保存",
+  "elapsed_seconds": 21.907,
+  "provider_events": [
+    {
+      "decision_step": 1,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 2,
+      "attempt": 1,
+      "http_status": 200,
+      "invalid_action_json": true
+    },
+    {
+      "decision_step": 2,
+      "attempt": 2,
+      "http_status": 200
+    },
+    {
+      "decision_step": 3,
+      "attempt": 1,
+      "http_status": 200,
+      "invalid_action_json": true
+    },
+    {
+      "decision_step": 3,
+      "attempt": 2,
+      "http_status": 200
+    },
+    {
+      "decision_step": 4,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 5,
+      "attempt": 1,
+      "http_status": 200
+    }
+  ],
   "draft_count": 0
 }

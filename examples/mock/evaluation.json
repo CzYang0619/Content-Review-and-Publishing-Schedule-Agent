@@ -1,7 +1,20 @@
 {
   "mode": "mock",
   "model": "deterministic-offline-simulator",
-  "executed_at": "2026-11-08T15:39:22.971960+00:00",
+  "executed_at": "2026-11-10T20:25:09.229898+00:00",
+  "planned_cases": [
+    "normal",
+    "missing_metadata",
+    "rule_risk",
+    "slot_conflict",
+    "duplicate",
+    "save_failure",
+    "supplement_recovery",
+    "changed_occupancy",
+    "confirmed_alternative",
+    "read_failure",
+    "all_slots_occupied"
+  ],
   "cases": [
     {
       "name": "normal",
@@ -80,5 +93,6 @@
       "errors": [],
       "file": "examples/mock/all_slots_occupied.json"
     }
-  ]
+  ],
+  "unrun_cases": []
 }

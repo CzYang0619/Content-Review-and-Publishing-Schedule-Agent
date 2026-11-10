@@ -8,7 +8,7 @@
   },
   "mode": "mock",
   "model": "deterministic-offline-simulator",
-  "started_at": "2026-11-08T15:39:23.002134+00:00",
+  "started_at": "2026-11-10T20:25:09.284666+00:00",
   "status": "needs_info",
   "review_status": "needs_info",
   "risks": [
@@ -131,5 +131,6 @@
   ],
   "message": "资料不足，未保存",
   "elapsed_seconds": 0.016,
+  "provider_events": [],
   "draft_count": 0
 }

@@ -7,10 +7,10 @@
     "hard_requirement": true
   },
   "mode": "live",
-  "model": "gpt-4.1-mini",
-  "started_at": "2026-11-08T15:39:24.815487+00:00",
+  "model": "glm-4-flash-250414",
+  "started_at": "2026-11-10T20:19:47.766489+00:00",
   "status": "failed",
-  "review_status": "not_checked",
+  "review_status": "passed",
   "risks": [],
   "suggested_at": null,
   "pending_items": [],
@@ -21,11 +21,143 @@
   "published": false,
   "trace": [
     {
-      "event": "model_error",
-      "error": "模型调用失败: RuntimeError: MODEL_HTTP_401"
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {
+          "supplement": false
+        },
+        "reason": "首先读取素材"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "owner": "内容团队",
+            "copyright": "cleared"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "审核最近一次读取的素材"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "passed",
+          "risks": []
+        }
+      }
+    },
+    {
+      "step": 3,
+      "decision": {
+        "action": "query_slots",
+        "args": {
+          "start_at": "2026-11-10T18:00:00+08:00"
+        },
+        "reason": "原时段可用就保存原时段；原时段被占用就选择返回结果中最早的 available=true 时段"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "slots": [
+            {
+              "at": "2026-11-10T18:00:00+08:00",
+              "available": true
+            },
+            {
+              "at": "2026-11-10T19:00:00+08:00",
+              "available": true
+            },
+            {
+              "at": "2026-11-10T20:00:00+08:00",
+              "available": true
+            }
+          ],
+          "reserved": false
+        }
+      }
+    },
+    {
+      "step": 4,
+      "decision": {
+        "action": "save_draft",
+        "args": {
+          "suggested_at": "2026-11-10T18:00:00+08:00"
+        },
+        "reason": "原时段可用就保存原时段"
+      },
+      "result": {
+        "ok": false,
+        "error": "INJECTED_SAVE_DRAFT_FAILURE"
+      }
+    },
+    {
+      "step": 5,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "failed",
+          "message": "保存草稿失败"
+        },
+        "reason": "保存返回 INJECTED_SAVE_DRAFT_FAILURE"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "failed"
+        }
+      }
     }
   ],
-  "message": "模型调用失败: RuntimeError: MODEL_HTTP_401",
-  "elapsed_seconds": 0.547,
+  "message": "执行失败，未完成",
+  "elapsed_seconds": 20.984,
+  "provider_events": [
+    {
+      "decision_step": 1,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 2,
+      "attempt": 1,
+      "http_status": 200,
+      "invalid_action_json": true
+    },
+    {
+      "decision_step": 2,
+      "attempt": 2,
+      "http_status": 200
+    },
+    {
+      "decision_step": 3,
+      "attempt": 1,
+      "http_status": 200,
+      "invalid_action_json": true
+    },
+    {
+      "decision_step": 3,
+      "attempt": 2,
+      "http_status": 200
+    },
+    {
+      "decision_step": 4,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 5,
+      "attempt": 1,
+      "http_status": 200
+    }
+  ],
   "draft_count": 0
 }

@@ -1,0 +1,24 @@
+{
+  "mode": "live",
+  "model": "glm-4-flash-250414",
+  "executed_at": "2026-11-10T20:04:12.129087+00:00",
+  "planned_cases": [
+    "slot_conflict"
+  ],
+  "cases": [
+    {
+      "name": "slot_conflict",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "status expected needs_confirmation, got failed",
+        "unexpected save state",
+        "expected 19:00 proposal",
+        "unapproved proposal cannot reserve slot"
+      ],
+      "file": "examples/glm4-experiment/slot_conflict.json"
+    }
+  ],
+  "unrun_cases": []
+}

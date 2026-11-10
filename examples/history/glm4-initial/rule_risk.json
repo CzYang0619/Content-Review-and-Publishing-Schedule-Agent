@@ -1,0 +1,91 @@
+{
+  "request": {
+    "request_id": "req-rule_risk",
+    "material_id": "M01",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "channel": "short-video",
+    "hard_requirement": true
+  },
+  "mode": "live",
+  "model": "glm-4-flash-250414",
+  "started_at": "2026-11-10T20:13:35.818190+00:00",
+  "status": "failed",
+  "review_status": "blocked",
+  "risks": [
+    {
+      "code": "COPYRIGHT_NOT_CLEARED"
+    }
+  ],
+  "suggested_at": null,
+  "pending_items": [],
+  "confirmation_status": "not_checked",
+  "draft": {
+    "saved": false
+  },
+  "published": false,
+  "trace": [
+    {
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {
+          "supplement": false
+        },
+        "reason": "short evidence-based decision, no hidden reasoning"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "owner": "内容团队",
+            "copyright": "unknown"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "short evidence-based decision, no hidden reasoning"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "blocked",
+          "risks": [
+            {
+              "code": "COPYRIGHT_NOT_CLEARED"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "event": "invalid_decision"
+    }
+  ],
+  "message": "模型返回无效动作结构",
+  "elapsed_seconds": 4.234,
+  "provider_events": [
+    {
+      "decision_step": 1,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 2,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 3,
+      "attempt": 1,
+      "http_status": 200
+    }
+  ],
+  "draft_count": 0
+}

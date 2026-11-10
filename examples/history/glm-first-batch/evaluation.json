@@ -1,0 +1,124 @@
+{
+  "mode": "live",
+  "model": "glm-4.7-flash",
+  "executed_at": "2026-11-10T19:52:22.466352+00:00",
+  "cases": [
+    {
+      "name": "normal",
+      "status": "completed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/live/normal.json"
+    },
+    {
+      "name": "slot_conflict",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "status expected needs_confirmation, got failed",
+        "unexpected save state",
+        "expected 19:00 proposal",
+        "unapproved proposal cannot reserve slot"
+      ],
+      "file": "examples/live/slot_conflict.json"
+    },
+    {
+      "name": "missing_metadata",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "status expected needs_info, got failed"
+      ],
+      "file": "examples/live/missing_metadata.json"
+    },
+    {
+      "name": "rule_risk",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "status expected blocked, got failed"
+      ],
+      "file": "examples/live/rule_risk.json"
+    },
+    {
+      "name": "duplicate",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "status expected completed, got failed",
+        "unexpected save state",
+        "duplicate request must produce exactly one draft"
+      ],
+      "file": "examples/live/duplicate.json"
+    },
+    {
+      "name": "save_failure",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "save failure injection was not reached"
+      ],
+      "file": "examples/live/save_failure.json"
+    },
+    {
+      "name": "changed_occupancy",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "status expected needs_confirmation, got failed",
+        "unexpected save state",
+        "expected 20:00 proposal",
+        "unapproved proposal cannot reserve slot"
+      ],
+      "file": "examples/live/changed_occupancy.json"
+    },
+    {
+      "name": "supplement_recovery",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "status expected completed, got failed",
+        "unexpected save state"
+      ],
+      "file": "examples/live/supplement_recovery.json"
+    },
+    {
+      "name": "confirmed_alternative",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "status expected completed, got failed",
+        "unexpected save state"
+      ],
+      "file": "examples/live/confirmed_alternative.json"
+    },
+    {
+      "name": "read_failure",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "review path was not exercised",
+        "status expected completed, got failed",
+        "unexpected save state"
+      ],
+      "file": "examples/live/read_failure.json"
+    }
+  ]
+}

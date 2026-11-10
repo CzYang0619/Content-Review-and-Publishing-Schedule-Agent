@@ -1,0 +1,51 @@
+{
+  "mode": "live",
+  "model": "glm-4.7-flash",
+  "executed_at": "2026-11-10T20:00:30.325640+00:00",
+  "planned_cases": [
+    "slot_conflict",
+    "missing_metadata",
+    "rule_risk",
+    "duplicate",
+    "save_failure",
+    "changed_occupancy",
+    "supplement_recovery",
+    "confirmed_alternative",
+    "read_failure",
+    "normal"
+  ],
+  "cases": [
+    {
+      "name": "slot_conflict",
+      "status": "incomplete",
+      "passed": false,
+      "errors": [
+        "status expected needs_confirmation, got incomplete",
+        "unexpected save state",
+        "expected 19:00 proposal",
+        "unapproved proposal cannot reserve slot"
+      ],
+      "file": "examples/live/slot_conflict.json"
+    },
+    {
+      "name": "missing_metadata",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "model unavailable; scenario was not exercised",
+        "status expected needs_info, got failed"
+      ],
+      "file": "examples/live/missing_metadata.json"
+    }
+  ],
+  "unrun_cases": [
+    "rule_risk",
+    "duplicate",
+    "save_failure",
+    "changed_occupancy",
+    "supplement_recovery",
+    "confirmed_alternative",
+    "read_failure",
+    "normal"
+  ]
+}

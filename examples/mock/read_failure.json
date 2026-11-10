@@ -8,7 +8,7 @@
   },
   "mode": "mock",
   "model": "deterministic-offline-simulator",
-  "started_at": "2026-11-08T15:39:23.166375+00:00",
+  "started_at": "2026-11-10T20:25:09.555019+00:00",
   "status": "completed",
   "review_status": "passed",
   "risks": [],
@@ -16,7 +16,7 @@
   "pending_items": [],
   "confirmation_status": "confirmed",
   "draft": {
-    "draft_id": "draft_873dd5fa96ef",
+    "draft_id": "draft_a2347842d0e5",
     "requested_at": "2026-11-10T18:00:00+08:00",
     "suggested_at": "2026-11-10T18:00:00+08:00",
     "confirmation_status": "confirmed",
@@ -115,7 +115,7 @@
       "result": {
         "ok": true,
         "data": {
-          "draft_id": "draft_873dd5fa96ef",
+          "draft_id": "draft_a2347842d0e5",
           "requested_at": "2026-11-10T18:00:00+08:00",
           "suggested_at": "2026-11-10T18:00:00+08:00",
           "confirmation_status": "confirmed",
@@ -145,6 +145,7 @@
     }
   ],
   "message": "草稿保存成功，未发布",
-  "elapsed_seconds": 0.016,
+  "elapsed_seconds": 0.031,
+  "provider_events": [],
   "draft_count": 1
 }

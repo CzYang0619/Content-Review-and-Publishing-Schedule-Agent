@@ -1,0 +1,99 @@
+{
+  "mode": "live",
+  "model": "glm-4-flash-250414",
+  "executed_at": "2026-11-10T20:12:16.917192+00:00",
+  "planned_cases": [
+    "normal",
+    "slot_conflict",
+    "missing_metadata",
+    "rule_risk",
+    "duplicate",
+    "save_failure",
+    "changed_occupancy",
+    "supplement_recovery",
+    "confirmed_alternative",
+    "read_failure"
+  ],
+  "cases": [
+    {
+      "name": "normal",
+      "status": "completed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/glm4-final/normal.json"
+    },
+    {
+      "name": "slot_conflict",
+      "status": "needs_confirmation",
+      "passed": true,
+      "errors": [],
+      "file": "examples/glm4-final/slot_conflict.json"
+    },
+    {
+      "name": "missing_metadata",
+      "status": "needs_info",
+      "passed": true,
+      "errors": [],
+      "file": "examples/glm4-final/missing_metadata.json"
+    },
+    {
+      "name": "rule_risk",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "status expected blocked, got failed"
+      ],
+      "file": "examples/glm4-final/rule_risk.json"
+    },
+    {
+      "name": "duplicate",
+      "status": "completed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/glm4-final/duplicate.json"
+    },
+    {
+      "name": "save_failure",
+      "status": "failed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/glm4-final/save_failure.json"
+    },
+    {
+      "name": "changed_occupancy",
+      "status": "needs_confirmation",
+      "passed": true,
+      "errors": [],
+      "file": "examples/glm4-final/changed_occupancy.json"
+    },
+    {
+      "name": "supplement_recovery",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "status expected completed, got failed",
+        "unexpected save state"
+      ],
+      "file": "examples/glm4-final/supplement_recovery.json"
+    },
+    {
+      "name": "confirmed_alternative",
+      "status": "completed",
+      "passed": true,
+      "errors": [],
+      "file": "examples/glm4-final/confirmed_alternative.json"
+    },
+    {
+      "name": "read_failure",
+      "status": "failed",
+      "passed": false,
+      "errors": [
+        "review path was not exercised",
+        "status expected completed, got failed",
+        "unexpected save state"
+      ],
+      "file": "examples/glm4-final/read_failure.json"
+    }
+  ],
+  "unrun_cases": []
+}

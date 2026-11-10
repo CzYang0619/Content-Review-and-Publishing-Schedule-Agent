@@ -8,7 +8,7 @@
   },
   "mode": "mock",
   "model": "deterministic-offline-simulator",
-  "started_at": "2026-11-08T15:39:23.189653+00:00",
+  "started_at": "2026-11-10T20:25:09.601640+00:00",
   "status": "incomplete",
   "review_status": "passed",
   "risks": [],
@@ -103,6 +103,7 @@
     }
   ],
   "message": "任务未完成",
-  "elapsed_seconds": 0.015,
+  "elapsed_seconds": 0.031,
+  "provider_events": [],
   "draft_count": 0
 }

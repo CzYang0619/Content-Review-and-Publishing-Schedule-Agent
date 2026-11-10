@@ -7,11 +7,15 @@
     "hard_requirement": true
   },
   "mode": "live",
-  "model": "gpt-4.1-mini",
-  "started_at": "2026-11-08T14:48:28.920460+00:00",
-  "status": "failed",
-  "review_status": "not_checked",
-  "risks": [],
+  "model": "glm-4-flash-250414",
+  "started_at": "2026-11-10T20:19:24.326544+00:00",
+  "status": "blocked",
+  "review_status": "blocked",
+  "risks": [
+    {
+      "code": "COPYRIGHT_NOT_CLEARED"
+    }
+  ],
   "suggested_at": null,
   "pending_items": [],
   "confirmation_status": "not_checked",
@@ -21,11 +25,81 @@
   "published": false,
   "trace": [
     {
-      "event": "model_error",
-      "error": "模型调用失败: RuntimeError: MODEL_HTTP_401"
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {
+          "supplement": false
+        },
+        "reason": "首先读取素材"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "owner": "内容团队",
+            "copyright": "unknown"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "读取素材后进行审核"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "blocked",
+          "risks": [
+            {
+              "code": "COPYRIGHT_NOT_CLEARED"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": 3,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "blocked",
+          "message": "素材因版权未清除被阻断"
+        },
+        "reason": "审核结果为 blocked"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "blocked"
+        }
+      }
     }
   ],
-  "message": "模型调用失败: RuntimeError: MODEL_HTTP_401",
-  "elapsed_seconds": 0.688,
+  "message": "规则风险阻断，未保存",
+  "elapsed_seconds": 4.188,
+  "provider_events": [
+    {
+      "decision_step": 1,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 2,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 3,
+      "attempt": 1,
+      "http_status": 200
+    }
+  ],
   "draft_count": 0
 }

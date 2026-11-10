@@ -1,4 +1,4 @@
-"""Launch live evaluation with BigModel's documented free GLM-4.7-Flash.
+"""Launch live evaluation with a BigModel officially listed free text model.
 
 No OpenAI key is needed. Credentials are passed only to a child process.
 Provider policy and account rate limits still apply; see README for sources.
@@ -14,8 +14,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
-    parser = argparse.ArgumentParser(description="智谱 GLM-4.7-Flash 免费模型真实验收入口")
+    parser = argparse.ArgumentParser(description="智谱免费模型真实验收入口")
     parser.add_argument("--cases", nargs="+", default=["normal", "slot_conflict", "missing_metadata", "rule_risk", "duplicate", "save_failure", "changed_occupancy", "supplement_recovery", "confirmed_alternative", "read_failure"])
+    parser.add_argument("--model", choices=["glm-4.7-flash", "glm-4-flash-250414"], default="glm-4-flash-250414")
+    parser.add_argument("--output-dir", help="Optional separate evidence directory")
     args = parser.parse_args()
     key = os.environ.get("BIGMODEL_API_KEY", "").strip()
     if not key:
@@ -28,9 +30,12 @@ def main():
     # Never fall back to a pre-existing OpenAI credential for another provider.
     env["OPENAI_API_KEY"] = key
     env["AGENT_BASE_URL"] = "https://open.bigmodel.cn/api/paas/v4"
-    env["AGENT_MODEL"] = "glm-4.7-flash"
-    print("Provider: BigModel | Model: glm-4.7-flash | Mode: live", flush=True)
-    return subprocess.call([sys.executable, str(ROOT / "scripts/evaluate.py"), "--mode", "live", "--cases", *args.cases], cwd=ROOT, env=env)
+    env["AGENT_MODEL"] = args.model
+    print("Provider: BigModel | Model: " + args.model + " | Mode: live", flush=True)
+    command = [sys.executable, str(ROOT / "scripts/evaluate.py"), "--mode", "live", "--fail-fast", "--cases", *args.cases]
+    if args.output_dir:
+        command.extend(["--output-dir", args.output_dir])
+    return subprocess.call(command, cwd=ROOT, env=env)
 
 
 if __name__ == "__main__":

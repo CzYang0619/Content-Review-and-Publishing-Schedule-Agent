@@ -8,6 +8,7 @@ from .tools import Tools, ToolError
 
 def run(req, world, db, model, max_steps=10, max_tools=8):
     started = time.monotonic()
+    provider_start = len(getattr(model, "events", []))
     trace = []
     output = {"request": req, "mode": model.mode, "model": model.name, "started_at": datetime.now(timezone.utc).isoformat(), "status": "incomplete", "review_status": "not_checked", "risks": [], "suggested_at": None, "pending_items": [], "confirmation_status": "not_checked", "draft": {"saved": False}, "published": False, "trace": trace}
     tools = None
@@ -87,5 +88,6 @@ def run(req, world, db, model, max_steps=10, max_tools=8):
         output["pending_items"].append("请补充缺失输入或素材元数据，见 message / risks")
     output["message"] = message
     output["elapsed_seconds"] = round(time.monotonic() - started, 3)
+    output["provider_events"] = getattr(model, "events", [])[provider_start:]
     output["draft_count"] = tools.count() if tools else 0
     return output

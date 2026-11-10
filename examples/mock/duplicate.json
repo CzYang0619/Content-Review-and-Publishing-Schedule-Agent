@@ -8,7 +8,7 @@
   },
   "mode": "mock",
   "model": "deterministic-offline-simulator",
-  "started_at": "2026-11-08T15:39:23.071151+00:00",
+  "started_at": "2026-11-10T20:25:09.394635+00:00",
   "status": "completed",
   "review_status": "previously_passed_not_revalidated",
   "risks": [],
@@ -17,7 +17,7 @@
   "confirmation_status": "confirmed",
   "draft": {
     "confirmation_status": "confirmed",
-    "draft_id": "draft_0df59fc68a41",
+    "draft_id": "draft_159906beb004",
     "published": false,
     "requested_at": "2026-11-10T18:00:00+08:00",
     "reserved": true,
@@ -32,7 +32,7 @@
       "event": "idempotent_replay",
       "result": {
         "confirmation_status": "confirmed",
-        "draft_id": "draft_0df59fc68a41",
+        "draft_id": "draft_159906beb004",
         "published": false,
         "requested_at": "2026-11-10T18:00:00+08:00",
         "reserved": true,
@@ -44,7 +44,8 @@
     }
   ],
   "message": "返回同一历史草稿；未重新校验当前时段或规则，可用性需复核",
-  "elapsed_seconds": 0.0,
+  "elapsed_seconds": 0.015,
+  "provider_events": [],
   "draft_count": 1,
   "first_execution": {
     "request": {
@@ -56,7 +57,7 @@
     },
     "mode": "mock",
     "model": "deterministic-offline-simulator",
-    "started_at": "2026-11-08T15:39:23.050541+00:00",
+    "started_at": "2026-11-10T20:25:09.375050+00:00",
     "status": "completed",
     "review_status": "passed",
     "risks": [],
@@ -64,7 +65,7 @@
     "pending_items": [],
     "confirmation_status": "confirmed",
     "draft": {
-      "draft_id": "draft_0df59fc68a41",
+      "draft_id": "draft_159906beb004",
       "requested_at": "2026-11-10T18:00:00+08:00",
       "suggested_at": "2026-11-10T18:00:00+08:00",
       "confirmation_status": "confirmed",
@@ -151,7 +152,7 @@
         "result": {
           "ok": true,
           "data": {
-            "draft_id": "draft_0df59fc68a41",
+            "draft_id": "draft_159906beb004",
             "requested_at": "2026-11-10T18:00:00+08:00",
             "suggested_at": "2026-11-10T18:00:00+08:00",
             "confirmation_status": "confirmed",
@@ -182,6 +183,7 @@
     ],
     "message": "草稿保存成功，未发布",
     "elapsed_seconds": 0.016,
+    "provider_events": [],
     "draft_count": 1
   }
 }

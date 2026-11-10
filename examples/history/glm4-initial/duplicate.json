@@ -1,0 +1,223 @@
+{
+  "request": {
+    "request_id": "req-duplicate",
+    "material_id": "M01",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "channel": "short-video",
+    "hard_requirement": true
+  },
+  "mode": "live",
+  "model": "glm-4-flash-250414",
+  "started_at": "2026-11-10T20:13:51.220265+00:00",
+  "status": "completed",
+  "review_status": "previously_passed_not_revalidated",
+  "risks": [],
+  "suggested_at": "2026-11-10T18:00:00+08:00",
+  "pending_items": [],
+  "confirmation_status": "confirmed",
+  "draft": {
+    "confirmation_status": "confirmed",
+    "draft_id": "draft_e46034b1a5ea",
+    "published": false,
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "reserved": true,
+    "saved": true,
+    "suggested_at": "2026-11-10T18:00:00+08:00",
+    "duplicate": true,
+    "availability_revalidated": false
+  },
+  "published": false,
+  "trace": [
+    {
+      "event": "idempotent_replay",
+      "result": {
+        "confirmation_status": "confirmed",
+        "draft_id": "draft_e46034b1a5ea",
+        "published": false,
+        "requested_at": "2026-11-10T18:00:00+08:00",
+        "reserved": true,
+        "saved": true,
+        "suggested_at": "2026-11-10T18:00:00+08:00",
+        "duplicate": true,
+        "availability_revalidated": false
+      }
+    }
+  ],
+  "message": "返回同一历史草稿；未重新校验当前时段或规则，可用性需复核",
+  "elapsed_seconds": 0.0,
+  "provider_events": [],
+  "draft_count": 1,
+  "first_execution": {
+    "request": {
+      "request_id": "req-duplicate",
+      "material_id": "M01",
+      "requested_at": "2026-11-10T18:00:00+08:00",
+      "channel": "short-video",
+      "hard_requirement": true
+    },
+    "mode": "live",
+    "model": "glm-4-flash-250414",
+    "started_at": "2026-11-10T20:13:40.116209+00:00",
+    "status": "completed",
+    "review_status": "passed",
+    "risks": [],
+    "suggested_at": "2026-11-10T18:00:00+08:00",
+    "pending_items": [],
+    "confirmation_status": "confirmed",
+    "draft": {
+      "draft_id": "draft_e46034b1a5ea",
+      "requested_at": "2026-11-10T18:00:00+08:00",
+      "suggested_at": "2026-11-10T18:00:00+08:00",
+      "confirmation_status": "confirmed",
+      "saved": true,
+      "published": false,
+      "reserved": true,
+      "duplicate": false
+    },
+    "published": false,
+    "trace": [
+      {
+        "step": 1,
+        "decision": {
+          "action": "read_material",
+          "args": {
+            "supplement": false
+          },
+          "reason": "short evidence-based decision, no hidden reasoning"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "material": {
+              "title": "字幕功能演示",
+              "owner": "内容团队",
+              "copyright": "cleared"
+            },
+            "supplement_checked": false
+          }
+        }
+      },
+      {
+        "step": 2,
+        "decision": {
+          "action": "check_rules",
+          "args": {},
+          "reason": "short evidence-based decision, no hidden reasoning"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "status": "passed",
+            "risks": []
+          }
+        }
+      },
+      {
+        "step": 3,
+        "decision": {
+          "action": "query_slots",
+          "args": {
+            "start_at": "2026-11-10T18:00:00+08:00"
+          },
+          "reason": "short evidence-based decision, no hidden reasoning"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "slots": [
+              {
+                "at": "2026-11-10T18:00:00+08:00",
+                "available": true
+              },
+              {
+                "at": "2026-11-10T19:00:00+08:00",
+                "available": true
+              },
+              {
+                "at": "2026-11-10T20:00:00+08:00",
+                "available": true
+              }
+            ],
+            "reserved": false
+          }
+        }
+      },
+      {
+        "step": 4,
+        "decision": {
+          "action": "save_draft",
+          "args": {
+            "suggested_at": "2026-11-10T18:00:00+08:00"
+          },
+          "reason": "short evidence-based decision, no hidden reasoning"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "draft_id": "draft_e46034b1a5ea",
+            "requested_at": "2026-11-10T18:00:00+08:00",
+            "suggested_at": "2026-11-10T18:00:00+08:00",
+            "confirmation_status": "confirmed",
+            "saved": true,
+            "published": false,
+            "reserved": true,
+            "duplicate": false
+          }
+        }
+      },
+      {
+        "step": 5,
+        "decision": {
+          "action": "finish",
+          "args": {
+            "status": "needs_confirmation",
+            "message": "已保存提案，等待确认"
+          },
+          "reason": "short evidence-based decision, no hidden reasoning"
+        },
+        "result": {
+          "ok": true,
+          "data": {
+            "status": "completed"
+          }
+        }
+      }
+    ],
+    "message": "草稿保存成功，未发布",
+    "elapsed_seconds": 11.109,
+    "provider_events": [
+      {
+        "decision_step": 1,
+        "attempt": 1,
+        "http_status": 200
+      },
+      {
+        "decision_step": 2,
+        "attempt": 1,
+        "http_status": 200
+      },
+      {
+        "decision_step": 3,
+        "attempt": 1,
+        "http_status": 200
+      },
+      {
+        "decision_step": 4,
+        "attempt": 1,
+        "http_status": 200,
+        "invalid_action_json": true
+      },
+      {
+        "decision_step": 4,
+        "attempt": 2,
+        "http_status": 200
+      },
+      {
+        "decision_step": 5,
+        "attempt": 1,
+        "http_status": 200
+      }
+    ],
+    "draft_count": 1
+  }
+}

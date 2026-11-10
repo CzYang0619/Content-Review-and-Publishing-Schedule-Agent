@@ -179,6 +179,61 @@ class AgentTests(unittest.TestCase):
                             model.decide({}, [])
                     self.assertEqual(str(caught.exception), expected)
 
+    def test_free_glm_parameters_do_not_leak_to_other_providers(self):
+        import io
+        import json
+        from unittest.mock import patch
+        from src.model import LiveModel
+        for url, name, uses_glm in [("https://open.bigmodel.cn/api/paas/v4", "glm-4.7-flash", True), ("https://api.openai.com/v1", "gpt-4.1-mini", False), ("https://example.org/v1", "glm-4.7-flash", False)]:
+            with self.subTest(url=url), patch.dict("os.environ", {"OPENAI_API_KEY": "fake-test-key", "AGENT_BASE_URL": url, "AGENT_MODEL": name}):
+                response = io.BytesIO(json.dumps({"choices": [{"message": {"content": '{"action":"read_material","args":{},"reason":"test"}'}}]}).encode())
+                with patch("urllib.request.urlopen", return_value=response) as request:
+                    LiveModel().decide({}, [])
+                sent = json.loads(request.call_args.args[0].data)
+                self.assertEqual("thinking" in sent, uses_glm)
+                if uses_glm:
+                    self.assertEqual(sent["thinking"], {"type": "disabled"})
+                    self.assertEqual(sent["max_tokens"], 1024)
+
+    def test_glm_retries_only_transient_provider_errors(self):
+        import io
+        import json
+        import urllib.error
+        from unittest.mock import patch
+        from src.model import LiveModel
+        config = {"OPENAI_API_KEY": "fake-test-key", "AGENT_BASE_URL": "https://open.bigmodel.cn/api/paas/v4", "AGENT_MODEL": "glm-4.7-flash"}
+        for code in (1302, "1305", "1113", "1308"):
+            with self.subTest(code=code), patch.dict("os.environ", config), patch("src.model.time.sleep") as sleep:
+                model = LiveModel()
+                error = urllib.error.HTTPError(model.url, 429, "test", {}, io.BytesIO(json.dumps({"error": {"code": code}}).encode()))
+                success = io.BytesIO(json.dumps({"choices": [{"message": {"content": '{"action":"read_material","args":{},"reason":"read first"}'}}]}).encode())
+                with patch("urllib.request.urlopen", side_effect=[error, success]) as request:
+                    if str(code) in ("1302", "1305"):
+                        self.assertEqual(model.decide({}, [])["action"], "read_material")
+                        self.assertEqual(request.call_count, 2)
+                        sleep.assert_called_once_with(15)
+                    else:
+                        with self.assertRaises(RuntimeError):
+                            model.decide({}, [])
+                        self.assertEqual(request.call_count, 1)
+                        sleep.assert_not_called()
+
+    def test_multiple_model_actions_are_rejected_before_tool_execution(self):
+        import io
+        import json
+        from unittest.mock import patch
+        from src.model import LiveModel
+        bad = '{"action":"read_material","args":{},"reason":"read"}\n{"action":"save_draft","args":{},"reason":"unobserved"}'
+        good = '{"action":"read_material","args":{},"reason":"read first"}'
+        responses = [io.BytesIO(json.dumps({"choices": [{"message": {"content": text}}]}).encode()) for text in (bad, good)]
+        config = {"OPENAI_API_KEY": "fake-test-key", "AGENT_BASE_URL": "https://open.bigmodel.cn/api/paas/v4", "AGENT_MODEL": "glm-4-flash-250414"}
+        with patch.dict("os.environ", config), patch("urllib.request.urlopen", side_effect=responses) as request:
+            model = LiveModel()
+            decision = model.decide({}, [])
+        self.assertEqual(decision["action"], "read_material")
+        self.assertEqual(request.call_count, 2)
+        self.assertTrue(model.events[0]["invalid_action_json"])
+
 
 if __name__ == "__main__":
     unittest.main()

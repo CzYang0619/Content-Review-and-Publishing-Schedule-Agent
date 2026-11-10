@@ -7,25 +7,175 @@
     "hard_requirement": true
   },
   "mode": "live",
-  "model": "gpt-4.1-mini",
-  "started_at": "2026-11-08T15:39:24.129247+00:00",
-  "status": "failed",
-  "review_status": "not_checked",
+  "model": "glm-4-flash-250414",
+  "started_at": "2026-11-10T20:18:33.638994+00:00",
+  "status": "needs_confirmation",
+  "review_status": "passed",
   "risks": [],
-  "suggested_at": null,
-  "pending_items": [],
-  "confirmation_status": "not_checked",
+  "suggested_at": "2026-11-10T19:00:00+08:00",
+  "pending_items": [
+    "请确认是否将要求时段改为 2026-11-10T19:00:00+08:00"
+  ],
+  "confirmation_status": "pending_hard_requirement_change",
   "draft": {
-    "saved": false
+    "draft_id": "draft_0ad8a46b08a0",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "suggested_at": "2026-11-10T19:00:00+08:00",
+    "confirmation_status": "pending_hard_requirement_change",
+    "saved": true,
+    "published": false,
+    "reserved": false,
+    "duplicate": false
   },
   "published": false,
   "trace": [
     {
-      "event": "model_error",
-      "error": "模型调用失败: RuntimeError: MODEL_HTTP_401"
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {
+          "supplement": false
+        },
+        "reason": "根据指令，首先读取素材 M01。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "owner": "内容团队",
+            "copyright": "cleared"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "读取素材后，进行规则审核。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "passed",
+          "risks": []
+        }
+      }
+    },
+    {
+      "step": 3,
+      "decision": {
+        "action": "query_slots",
+        "args": {
+          "start_at": "2026-11-10T18:00:00+08:00"
+        },
+        "reason": "审核通过，查询用户要求的时段 2026-11-10 18:00:00 的可用性。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "slots": [
+            {
+              "at": "2026-11-10T18:00:00+08:00",
+              "available": false
+            },
+            {
+              "at": "2026-11-10T19:00:00+08:00",
+              "available": true
+            },
+            {
+              "at": "2026-11-10T20:00:00+08:00",
+              "available": true
+            }
+          ],
+          "reserved": false
+        }
+      }
+    },
+    {
+      "step": 4,
+      "decision": {
+        "action": "save_draft",
+        "args": {
+          "suggested_at": "2026-11-10T19:00:00+08:00"
+        },
+        "reason": "原时段不可用，选择最早的 available=true 时段 2026-11-10 19:00:00 保存草稿。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "draft_id": "draft_0ad8a46b08a0",
+          "requested_at": "2026-11-10T18:00:00+08:00",
+          "suggested_at": "2026-11-10T19:00:00+08:00",
+          "confirmation_status": "pending_hard_requirement_change",
+          "saved": true,
+          "published": false,
+          "reserved": false,
+          "duplicate": false
+        }
+      }
+    },
+    {
+      "step": 5,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "needs_confirmation",
+          "message": "草稿已保存，待用户确认变更硬性时间。"
+        },
+        "reason": "保存草稿返回 pending_hard_requirement_change，表示需要用户确认变更硬性时间。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "needs_confirmation"
+        }
+      }
     }
   ],
-  "message": "模型调用失败: RuntimeError: MODEL_HTTP_401",
-  "elapsed_seconds": 0.688,
-  "draft_count": 0
+  "message": "建议已保存为待确认草稿，未发布",
+  "elapsed_seconds": 28.765,
+  "provider_events": [
+    {
+      "decision_step": 1,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 2,
+      "attempt": 1,
+      "http_status": 200,
+      "invalid_action_json": true
+    },
+    {
+      "decision_step": 2,
+      "attempt": 2,
+      "http_status": 200
+    },
+    {
+      "decision_step": 3,
+      "attempt": 1,
+      "http_status": 200,
+      "invalid_action_json": true
+    },
+    {
+      "decision_step": 3,
+      "attempt": 2,
+      "http_status": 200
+    },
+    {
+      "decision_step": 4,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 5,
+      "attempt": 1,
+      "http_status": 200
+    }
+  ],
+  "draft_count": 1
 }

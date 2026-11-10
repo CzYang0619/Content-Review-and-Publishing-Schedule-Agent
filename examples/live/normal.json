@@ -7,25 +7,179 @@
     "hard_requirement": true
   },
   "mode": "live",
-  "model": "gpt-4.1-mini",
-  "started_at": "2026-11-10T19:27:17.328790+00:00",
-  "status": "failed",
-  "review_status": "not_checked",
+  "model": "glm-4-flash-250414",
+  "started_at": "2026-11-10T20:18:06.555525+00:00",
+  "status": "completed",
+  "review_status": "passed",
   "risks": [],
-  "suggested_at": null,
+  "suggested_at": "2026-11-10T18:00:00+08:00",
   "pending_items": [],
-  "confirmation_status": "not_checked",
+  "confirmation_status": "confirmed",
   "draft": {
-    "saved": false
+    "draft_id": "draft_62a6cfb6cb88",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "suggested_at": "2026-11-10T18:00:00+08:00",
+    "confirmation_status": "confirmed",
+    "saved": true,
+    "published": false,
+    "reserved": true,
+    "duplicate": false
   },
   "published": false,
   "trace": [
     {
-      "event": "model_error",
-      "error": "模型调用失败: RuntimeError: MODEL_HTTP_429"
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {
+          "supplement": false
+        },
+        "reason": "根据指令，首先读取素材。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "owner": "内容团队",
+            "copyright": "cleared"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "读取素材成功，接下来审核素材是否符合规则。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "passed",
+          "risks": []
+        }
+      }
+    },
+    {
+      "step": 3,
+      "decision": {
+        "action": "query_slots",
+        "args": {
+          "start_at": "2026-11-10T18:00:00+08:00"
+        },
+        "reason": "审核通过，需要查询用户要求时段的可用性。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "slots": [
+            {
+              "at": "2026-11-10T18:00:00+08:00",
+              "available": true
+            },
+            {
+              "at": "2026-11-10T19:00:00+08:00",
+              "available": true
+            },
+            {
+              "at": "2026-11-10T20:00:00+08:00",
+              "available": true
+            }
+          ],
+          "reserved": false
+        }
+      }
+    },
+    {
+      "step": 4,
+      "decision": {
+        "action": "save_draft",
+        "args": {
+          "suggested_at": "2026-11-10T18:00:00+08:00"
+        },
+        "reason": "原时段可用，保存原时段的草稿。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "draft_id": "draft_62a6cfb6cb88",
+          "requested_at": "2026-11-10T18:00:00+08:00",
+          "suggested_at": "2026-11-10T18:00:00+08:00",
+          "confirmation_status": "confirmed",
+          "saved": true,
+          "published": false,
+          "reserved": true,
+          "duplicate": false
+        }
+      }
+    },
+    {
+      "step": 5,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "completed",
+          "message": "草稿保存成功且用户已确认。"
+        },
+        "reason": "根据保存返回结果，用户已确认提案。"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "completed"
+        }
+      }
     }
   ],
-  "message": "模型调用失败: RuntimeError: MODEL_HTTP_429",
-  "elapsed_seconds": 1.344,
-  "draft_count": 0
+  "message": "草稿保存成功，未发布",
+  "elapsed_seconds": 27.078,
+  "provider_events": [
+    {
+      "decision_step": 1,
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "decision_step": 2,
+      "attempt": 1,
+      "http_status": 200,
+      "invalid_action_json": true
+    },
+    {
+      "decision_step": 2,
+      "attempt": 2,
+      "http_status": 200
+    },
+    {
+      "decision_step": 3,
+      "attempt": 1,
+      "http_status": 200,
+      "invalid_action_json": true
+    },
+    {
+      "decision_step": 3,
+      "attempt": 2,
+      "http_status": 200
+    },
+    {
+      "decision_step": 4,
+      "attempt": 1,
+      "http_status": 200,
+      "invalid_action_json": true
+    },
+    {
+      "decision_step": 4,
+      "attempt": 2,
+      "http_status": 200
+    },
+    {
+      "decision_step": 5,
+      "attempt": 1,
+      "http_status": 200
+    }
+  ],
+  "draft_count": 1
 }

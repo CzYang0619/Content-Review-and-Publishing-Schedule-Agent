@@ -69,7 +69,10 @@ def main():
     p.add_argument("--mode", choices=["mock", "live"], default="mock")
     p.add_argument("--cases", nargs="*")
     p.add_argument("--generate-only", action="store_true")
+    p.add_argument("--fail-fast", action="store_true", help="Stop on provider failure instead of sending the remaining cases")
+    p.add_argument("--output-dir", help="Separate evidence directory for a model experiment")
     args = p.parse_args()
+    output_root = Path(args.output_dir).resolve() if args.output_dir else ROOT / "examples" / args.mode
     cases = fixtures()
     for name, data in cases.items():
         path = ROOT / "examples" / "inputs" / (name + ".json")
@@ -78,8 +81,9 @@ def main():
     if args.generate_only:
         return 0
     model = LiveModel() if args.mode == "live" else MockModel()
-    summary = {"mode": args.mode, "model": model.name, "executed_at": datetime.now(timezone.utc).isoformat(), "cases": []}
-    for name in (args.cases or list(cases)):
+    planned = args.cases or list(cases)
+    summary = {"mode": args.mode, "model": model.name, "executed_at": datetime.now(timezone.utc).isoformat(), "planned_cases": planned, "cases": []}
+    for name in planned:
         data = cases[name]
         with tempfile.TemporaryDirectory() as temp:
             db = Path(temp) / "drafts.db"
@@ -88,12 +92,17 @@ def main():
             if name == "duplicate":
                 output["first_execution"] = copy.deepcopy(first)
             errors = check(name, output)
-            path = ROOT / "examples" / args.mode / (name + ".json")
+            path = output_root / (name + ".json")
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-            summary["cases"].append({"name": name, "status": output["status"], "passed": not errors, "errors": errors, "file": str(path.relative_to(ROOT)).replace("\\", "/")})
+            evidence_path = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
+            summary["cases"].append({"name": name, "status": output["status"], "passed": not errors, "errors": errors, "file": str(evidence_path).replace("\\", "/")})
             print(name, output["status"], "PASS" if not errors else errors, flush=True)
-    path = ROOT / "examples" / args.mode / "evaluation.json"
+            summary["unrun_cases"] = [item for item in planned if item not in [c["name"] for c in summary["cases"]]]
+            (path.parent / "evaluation.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            if args.fail_fast and any(t.get("event") == "model_error" for t in output.get("first_execution", output)["trace"]):
+                break
+    path = output_root / "evaluation.json"
     path.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return int(any(not item["passed"] for item in summary["cases"]))
 

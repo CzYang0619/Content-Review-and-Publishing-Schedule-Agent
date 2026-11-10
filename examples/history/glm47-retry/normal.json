@@ -1,0 +1,140 @@
+{
+  "request": {
+    "request_id": "req-normal",
+    "material_id": "M01",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "channel": "short-video",
+    "hard_requirement": true
+  },
+  "mode": "live",
+  "model": "glm-4.7-flash",
+  "started_at": "2026-11-10T19:52:22.475730+00:00",
+  "status": "completed",
+  "review_status": "passed",
+  "risks": [],
+  "suggested_at": "2026-11-10T18:00:00+08:00",
+  "pending_items": [],
+  "confirmation_status": "confirmed",
+  "draft": {
+    "draft_id": "draft_41dbb3446140",
+    "requested_at": "2026-11-10T18:00:00+08:00",
+    "suggested_at": "2026-11-10T18:00:00+08:00",
+    "confirmation_status": "confirmed",
+    "saved": true,
+    "published": false,
+    "reserved": true,
+    "duplicate": false
+  },
+  "published": false,
+  "trace": [
+    {
+      "step": 1,
+      "decision": {
+        "action": "read_material",
+        "args": {
+          "supplement": false
+        },
+        "reason": "Initial request received. Starting by reading the primary material details."
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "material": {
+            "title": "字幕功能演示",
+            "owner": "内容团队",
+            "copyright": "cleared"
+          },
+          "supplement_checked": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "decision": {
+        "action": "check_rules",
+        "args": {},
+        "reason": "Material read successfully. Checking publication rules and schedule availability for the requested time."
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "passed",
+          "risks": []
+        }
+      }
+    },
+    {
+      "step": 3,
+      "decision": {
+        "action": "query_slots",
+        "args": {
+          "start_at": "2026-11-10T18:00:00+08:00"
+        },
+        "reason": "Rules passed. Querying schedule availability for the requested time slot."
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "slots": [
+            {
+              "at": "2026-11-10T18:00:00+08:00",
+              "available": true
+            },
+            {
+              "at": "2026-11-10T19:00:00+08:00",
+              "available": true
+            },
+            {
+              "at": "2026-11-10T20:00:00+08:00",
+              "available": true
+            }
+          ],
+          "reserved": false
+        }
+      }
+    },
+    {
+      "step": 4,
+      "decision": {
+        "action": "save_draft",
+        "args": {
+          "suggested_at": "2026-11-10T18:00:00+08:00"
+        },
+        "reason": "Requested time slot 2026-11-10 18:00 is available. Draft saved successfully."
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "draft_id": "draft_41dbb3446140",
+          "requested_at": "2026-11-10T18:00:00+08:00",
+          "suggested_at": "2026-11-10T18:00:00+08:00",
+          "confirmation_status": "confirmed",
+          "saved": true,
+          "published": false,
+          "reserved": true,
+          "duplicate": false
+        }
+      }
+    },
+    {
+      "step": 5,
+      "decision": {
+        "action": "finish",
+        "args": {
+          "status": "completed",
+          "message": "草稿已保存。建议时间：2026-11-10 18:00，状态已确认。"
+        },
+        "reason": "Draft saved and confirmed successfully at the requested time."
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "status": "completed"
+        }
+      }
+    }
+  ],
+  "message": "草稿保存成功，未发布",
+  "elapsed_seconds": 131.656,
+  "draft_count": 1
+}
