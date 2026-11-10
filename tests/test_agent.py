@@ -163,6 +163,22 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(out["draft_count"], 0)
         self.assertIn("model unavailable; scenario was not exercised", check("save_failure", out))
 
+    def test_provider_error_exposes_only_allowlisted_code(self):
+        import io
+        import urllib.error
+        from unittest.mock import patch
+        from src.model import LiveModel
+        cases = [(b'{"error":{"code":"insufficient_quota","message":"private detail"}}', "MODEL_HTTP_429:insufficient_quota"), (b'{"error":{"code":"credit_balance_exhausted"}}', "MODEL_HTTP_429:credit_balance_exhausted"), (b'{"error":{"code":"private detail"}}', "MODEL_HTTP_429"), (b'not json', "MODEL_HTTP_429")]
+        with patch.dict("os.environ", {"OPENAI_API_KEY": "fake-unit-test-key"}):
+            model = LiveModel()
+            for body, expected in cases:
+                with self.subTest(expected=expected):
+                    error = urllib.error.HTTPError(model.url, 429, "quota", {}, io.BytesIO(body))
+                    with patch("urllib.request.urlopen", side_effect=error):
+                        with self.assertRaises(RuntimeError) as caught:
+                            model.decide({}, [])
+                    self.assertEqual(str(caught.exception), expected)
+
 
 if __name__ == "__main__":
     unittest.main()

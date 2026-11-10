@@ -4,9 +4,9 @@
 - GitHub URL：https://github.com/CzYang0619/Content-Review-and-Publishing-Schedule-Agent
 - 最终 commit SHA：以仓库 `git rev-parse HEAD` 的输出为准；远程交付后再填写提交表。
 - 当前完成：核心代码、离线测试与案例、文档；已使用 CzYang0619 授权并成功上传 GitHub main。
-- 当前未完成：真实接口 HTTP 401，真实模型动态路径未验收。此前 GitHub 账号写权限问题已解决。
+- 当前未完成：最新真实接口返回 HTTP 429，最小请求诊断为 credit_balance_exhausted（insufficient_quota），真实模型动态路径未验收。此前 GitHub 账号写权限问题已解决。
 - 计时开始：2026-11-08 22:44:16 Asia/Shanghai。
 - 本地构建与验证完成：2026-11-08 23:44:38 Asia/Shanghai；本阶段墙钟用时 60 分 22 秒，包括工具执行及授权等待，不包含之后的远程上传耗时。这是 AI 辅助执行用时，非候选人独立开发时长。
-- 本地验证结果：18 项自动化测试通过，11 组离线案例断言通过；3 组最终真实接口验收均因认证失败而未通过，不能作为模型决策证据。
+- 本地验证结果：19 项自动化测试通过，11 组离线案例断言通过；最新 normal 真实接口记录因 HTTP 429 未通过，其他保留的真实接口案例是此前 HTTP 401 的历史失败记录，均不能作为成功模型决策证据。
 
 提交前必须让真实模型路径通过并更新 README、评估与 AI 使用说明中的状态；不能将离线 Mock 记录当成完整达标证据。

@@ -8,9 +8,9 @@
 
 - 核心实现、离线验收案例、自动化测试和文档已提供。
 - `examples/mock/` 是实际运行的离线记录，仅证明流程与业务约束。
-- 本机真实模型接口认证失败（HTTP 401），记录位于 `examples/live/`。**这些记录不是通过的 ReAct 证据，当前版本尚不满足考核的真实模型决策验收。** 配置有效接口后运行下方 live 评估，生成真实结果。
+- 最新真实模型尝试返回 HTTP 429，独立最小请求诊断为 `credit_balance_exhausted` / `insufficient_quota`，需要补充 API 额度。历史其他案例的 HTTP 401 失败记录仍保留于 `examples/live/`。**这些记录不是通过的 ReAct 证据，当前版本尚不满足考核的真实模型决策验收。** 接口额度恢复后运行下方 live 评估，生成真实结果。
 - GitHub 目标仓库：https://github.com/CzYang0619/Content-Review-and-Publishing-Schedule-Agent 。最终 commit SHA 使用 `git rev-parse HEAD` 核对。
-- 已使用 CzYang0619 完成 GitHub 授权并成功上传 main；可克隆仓库运行。早先的账号写权限问题已解决，真实模型接口认证问题仍待解决。
+- 已使用 CzYang0619 完成 GitHub 授权并成功上传 main；可克隆仓库运行。早先的账号写权限问题已解决，真实模型接口额度问题仍待解决。
 
 ## 环境与运行
 

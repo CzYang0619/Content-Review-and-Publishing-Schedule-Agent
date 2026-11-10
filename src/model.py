@@ -35,7 +35,13 @@ class LiveModel:
             return json.loads(data["choices"][0]["message"]["content"])
         except urllib.error.HTTPError as exc:
             # Never dump response bodies, headers or credentials to traces.
-            raise RuntimeError("MODEL_HTTP_" + str(exc.code)) from None
+            try:
+                code = json.loads(exc.read(65536)).get("error", {}).get("code")
+            except (ValueError, AttributeError, OSError):
+                code = None
+            known = ("insufficient_quota", "credit_balance_exhausted", "rate_limit_exceeded", "invalid_api_key", "model_not_found")
+            suffix = ":" + code if isinstance(code, str) and code in known else ""
+            raise RuntimeError("MODEL_HTTP_" + str(exc.code) + suffix) from None
         except urllib.error.URLError:
             raise RuntimeError("MODEL_NETWORK_ERROR") from None
 
