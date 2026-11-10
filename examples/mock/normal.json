@@ -8,7 +8,7 @@
   },
   "mode": "mock",
   "model": "deterministic-offline-simulator",
-  "started_at": "2026-11-10T20:25:09.237953+00:00",
+  "started_at": "2026-11-10T20:40:13.735128+00:00",
   "status": "completed",
   "review_status": "passed",
   "risks": [],
@@ -16,7 +16,10 @@
   "pending_items": [],
   "confirmation_status": "confirmed",
   "draft": {
-    "draft_id": "draft_02443ac1670c",
+    "draft_id": "draft_85790cb520db",
+    "request_id": "req-normal",
+    "material_id": "M01",
+    "channel": "short-video",
     "requested_at": "2026-11-10T18:00:00+08:00",
     "suggested_at": "2026-11-10T18:00:00+08:00",
     "confirmation_status": "confirmed",
@@ -103,7 +106,10 @@
       "result": {
         "ok": true,
         "data": {
-          "draft_id": "draft_02443ac1670c",
+          "draft_id": "draft_85790cb520db",
+          "request_id": "req-normal",
+          "material_id": "M01",
+          "channel": "short-video",
           "requested_at": "2026-11-10T18:00:00+08:00",
           "suggested_at": "2026-11-10T18:00:00+08:00",
           "confirmation_status": "confirmed",

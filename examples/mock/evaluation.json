@@ -1,7 +1,7 @@
 {
   "mode": "mock",
   "model": "deterministic-offline-simulator",
-  "executed_at": "2026-11-10T20:25:09.229898+00:00",
+  "executed_at": "2026-11-10T20:40:13.726900+00:00",
   "planned_cases": [
     "normal",
     "missing_metadata",

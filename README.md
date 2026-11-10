@@ -6,7 +6,7 @@
 
 ## 当前交付状态
 
-- 核心实现、22 项自动化测试、11 组离线案例和 10 组真实模型案例已提供；六项必须验收均已覆盖。
+- 核心实现、24 项自动化测试、11 组离线案例和 10 组真实模型案例已提供；六项必须验收均已覆盖。
 - `examples/mock/` 是实际运行的离线记录，仅证明流程与业务约束。
 - 真实验收使用智谱官方免费 `glm-4-flash-250414`，10/10 案例断言通过。提交基线为 `examples/glm4-final/`；`examples/live/` 是同一批次的便捷副本，之后复跑会覆盖后者。原始限流、参数错误和格式错误记录保留在 `examples/history/`、`examples/glm4-experiment/`。
 - GitHub 目标仓库：https://github.com/CzYang0619/Content-Review-and-Publishing-Schedule-Agent 。最终 commit SHA 使用 `git rev-parse HEAD` 核对。
@@ -77,6 +77,8 @@ python -m src.cli --input examples/inputs/slot_conflict.json --mode live --db ru
 `request` 字段：`request_id`、`material_id`、`requested_at`、`channel`、`hard_requirement`；可选 `confirmed_at` 表示用户明确同意的替代时间。时间严格使用 `2026-11-10T18:00:00+08:00` 格式，一小时时段。原要求本身视为用户对该时段的授权。
 
 输出包含 `review_status`、`risks`、`suggested_at`、`pending_items`、`confirmation_status`、`draft.saved`、`draft.draft_id`、`status` 和完整 `trace`。`published` 始终为 false。
+
+新增保存的草稿会持久记录 `material_id`、`request_id` 和 `channel`，保证草稿能关联到具体素材；已有排期的时间同样要求使用规范 ISO 格式，不合规时拒绝规划，避免漏判占用。
 
 - 替代硬性时间可保存为 `pending_hard_requirement_change` 提案，不占用时段。
 - 用户确认替代时间后，以**新的 request_id** 携带精确 `confirmed_at` 提交；旧草稿保留。

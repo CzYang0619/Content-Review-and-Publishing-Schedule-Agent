@@ -3,7 +3,7 @@
 - 题号：1 — 素材审核与发布排期 Agent
 - GitHub URL：https://github.com/CzYang0619/Content-Review-and-Publishing-Schedule-Agent
 - 最终 commit SHA：以仓库 `git rev-parse HEAD` 的输出为准；远程交付后再填写提交表。
-- 当前工程内容：核心代码、22 项自动化测试、11 组离线案例、10 组真实模型案例及全部文档；六项必须验收均已覆盖。GitHub main 的最终提交请用 git rev-parse HEAD 核对。
+- 当前工程内容：核心代码、24 项自动化测试、11 组离线案例、10 组真实模型案例及全部文档；六项必须验收均已覆盖。GitHub main 的最终提交请用 git rev-parse HEAD 核对。
 - 真实模型：智谱官方免费 glm-4-flash-250414；提交基线 examples/glm4-final/evaluation.json 为 10/10，unrun_cases 为空。无需 OpenAI 额度。
 - 已知限制：合成元数据审核、固定整点时段、外部排期静态快照、免费服务稳定性及模型说明文字准确性。未接真实发布。个人独立修改与复验尚未记录，AI 辅助范围见 docs/04-ai-usage.md。
 - 计时开始：2026-11-08 22:44:16 Asia/Shanghai。

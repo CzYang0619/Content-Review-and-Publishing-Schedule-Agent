@@ -49,6 +49,25 @@ class AgentTests(unittest.TestCase):
                     output["first_execution"] = first
                 self.assertEqual(check(name, output), [])
 
+    def test_saved_draft_keeps_material_request_and_channel(self):
+        import json
+        output = self.run_case("normal")
+        case = self.cases["normal"]
+        tool = Tools(case["request"], case["world"], self.db)
+        with tool.connect() as conn:
+            stored = json.loads(conn.execute("SELECT payload FROM drafts").fetchone()[0])
+        for key in ("material_id", "request_id", "channel"):
+            self.assertEqual(stored[key], case["request"][key])
+            self.assertEqual(output["draft"][key], stored[key])
+
+    def test_invalid_existing_time_cannot_be_treated_as_available(self):
+        for bad_time in ("2026-11-10T18:00+08:00", "2026-11-10T18:00:00"):
+            with self.subTest(bad_time=bad_time):
+                self.cases["normal"]["world"]["schedule"] = [{"at": bad_time, "channel": "short-video"}]
+                output = self.run_case("normal")
+                self.assertEqual(output["status"], "needs_info")
+                self.assertFalse(output["draft"]["saved"])
+
     def test_cannot_claim_success_without_saving(self):
         output = self.run_case("normal", ScriptModel([action("finish", status="completed", message="已发布并保存")]))
         self.assertEqual(output["status"], "incomplete")

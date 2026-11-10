@@ -17,6 +17,10 @@ class Tools:
 
     def __init__(self, req, world, db):
         self.req, self.world = req, world
+        for entry in world["schedule"]:
+            slot(entry["at"])
+            if not isinstance(entry["channel"], str) or not entry["channel"].strip():
+                raise ValueError("Existing schedule channel must be a nonempty string")
         self.read = None
         self.checked = None
         self.queried = set()
@@ -99,7 +103,7 @@ class Tools:
             confirmation = "pending_hard_requirement_change"
         else:
             confirmation = "confirmed" if confirmed else "pending"
-        payload = {"draft_id": "draft_" + uuid.uuid4().hex[:12], "requested_at": self.req["requested_at"], "suggested_at": at, "confirmation_status": confirmation, "saved": True, "published": False, "reserved": confirmed}
+        payload = {"draft_id": "draft_" + uuid.uuid4().hex[:12], "request_id": self.req["request_id"], "material_id": self.req["material_id"], "channel": self.req["channel"], "requested_at": self.req["requested_at"], "suggested_at": at, "confirmation_status": confirmation, "saved": True, "published": False, "reserved": confirmed}
         # Recheck under write transaction, including other confirmed drafts.
         with self.connect() as conn:
             conn.execute("BEGIN IMMEDIATE")

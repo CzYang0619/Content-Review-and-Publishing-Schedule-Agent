@@ -8,7 +8,7 @@
   },
   "mode": "mock",
   "model": "deterministic-offline-simulator",
-  "started_at": "2026-11-10T20:25:09.312291+00:00",
+  "started_at": "2026-11-10T20:40:13.793288+00:00",
   "status": "blocked",
   "review_status": "blocked",
   "risks": [
@@ -81,7 +81,7 @@
     }
   ],
   "message": "规则风险阻断，未保存",
-  "elapsed_seconds": 0.015,
+  "elapsed_seconds": 0.0,
   "provider_events": [],
   "draft_count": 0
 }
