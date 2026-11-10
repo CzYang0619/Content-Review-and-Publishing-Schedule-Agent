@@ -1,6 +1,6 @@
 # 素材审核与发布排期 Agent
 
-小影校招第 1 题。CLI / Python 标准库 / SQLite / 可配置真实模型。
+小影校招第 1 题。CLI / Python 标准库 / SQLite / 可配置真实模型。大模型不限定服务商，提供智谱免费模型接入入口。
 
 读取素材 → 审核 → 查询时段 → 模型根据观察调整动作 → 保存草稿或说明阻断原因。**只有草稿，没有发布接口。**
 
@@ -28,7 +28,26 @@ Windows 若 `python` 指向 WindowsApps 占位程序，改用已安装的 Python
 
 评估脚本每个案例使用独立临时数据库；`duplicate` 会在同一数据库重复提交并保留首次记录。CLI 则持久使用 `--db` 路径，因此同一输入重复运行会返回历史草稿。
 
-## 真实模型入口
+## 免费真实模型入口（智谱）
+
+已核对智谱官方 [免费发布公告](https://www.zhipuai.cn/zh/news/148) 和 [GLM-4.7-Flash 文档](https://docs.bigmodel.cn/cn/guide/models/free/glm-4.7-flash)：该模型可免费调用，支持结构化输出。账户资格、实名要求和限流以平台实际提示为准；尚未取得智谱账户密钥，因此本项目尚无该平台成功运行记录。
+
+1. 登录 [智谱 API Key 管理](https://bigmodel.cn/usercenter/proj-mgmt/apikeys)，创建自己的密钥。无需提供 OpenAI 密钥。
+2. 在本机终端运行以下命令，按提示粘贴智谱密钥，输入隐藏、不保存文件：
+
+```bash
+python scripts/run_free.py --cases normal
+```
+
+单案例成功后运行全部目标案例：
+
+```bash
+python scripts/run_free.py
+```
+
+也可预先设置本机进程环境变量 `BIGMODEL_API_KEY`。启动器固定使用 `https://open.bigmodel.cn/api/paas/v4` 和 `glm-4.7-flash`，忽略已有的其他服务商模型配置。不要选成不同的付费型号（例如 FlashX）。官方免费政策可能调整，不承诺无限调用。成功验收后才能更新当前“未完成真实模型验收”的状态。
+
+## 通用真实模型入口（含 OpenAI）
 
 `.env.example` 只说明变量；程序读取进程环境，不自动加载 `.env`。不要提交真实密钥。
 
